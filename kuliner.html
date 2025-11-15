@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rendang - Kuliner Nusantara | Wonderful Indonesia</title>
+    <title>Kuliner Nusantara - Wonderful Indonesia</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Bootstrap Icons -->
@@ -17,12 +17,9 @@
         rel="stylesheet">
     <style>
         :root {
-            --primary: #16A34A;
-            /* Hijau emerald – modern, segar */
-            --secondary: #86EFAC;
-            /* Hijau muda lembut */
-            --accent: #FACC15;
-            /* Kuning soft opsional (bisa dihapus) */
+            --primary: #10b981;
+            --secondary: #059669;
+            --accent: #047857;
             --dark: #1e293b;
             --light: #f8fafc;
         }
@@ -41,7 +38,7 @@
         }
 
         .hero-gradient {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9) 0%, rgba(249, 115, 22, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(5, 150, 105, 0.8) 100%);
         }
 
         .section-title {
@@ -92,7 +89,7 @@
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
         }
 
         .btn-secondary {
@@ -171,49 +168,82 @@
             visibility: visible;
         }
 
-        .culinary-hero {
-            height: 60vh;
-            min-height: 500px;
+        .culinary-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
         }
 
-        .ingredient-card {
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+        .culinary-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
         }
 
-        .ingredient-card:hover {
-            border-left-color: var(--secondary);
-            transform: translateX(5px);
+        .culinary-card:hover .culinary-overlay {
+            transform: translateY(0);
         }
 
-        .step-card {
-            transition: all 0.3s ease;
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .nutrition-card {
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            transition: all 0.3s ease;
-        }
-
-        .nutrition-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .tab-button {
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab-button.active {
-            border-bottom-color: var(--primary);
-            color: var(--primary);
+        .culinary-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .region-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            height: 200px;
+        }
+
+        .region-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            padding: 20px;
+            color: white;
+        }
+
+        .pagination-btn {
+            transition: all 0.3s ease;
+        }
+
+        .pagination-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pagination-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-section {
+            height: 70vh;
+            min-height: 600px;
         }
 
         .breadcrumb {
@@ -221,7 +251,8 @@
             backdrop-filter: blur(10px);
         }
 
-        .floating-action {
+        /* Animasi Kreatif */
+        .floating-element {
             animation: floating 3s ease-in-out infinite;
         }
 
@@ -238,563 +269,736 @@
                 transform: translateY(0px);
             }
         }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--primary)
+            }
+        }
+
+        .leaf-particle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50% 0 50% 0;
+            opacity: 0.3;
+            animation: float-leaf 8s infinite linear;
+        }
+
+        @keyframes float-leaf {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.3;
+            }
+
+            90% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        .culinary-story {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            border-left: 4px solid var(--primary);
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .culinary-journey {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .journey-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+            transform: translateX(-50%);
+        }
+
+        .culinary-fact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fact-icon {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .culinary-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .culinary-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 300px;
+            scroll-snap-align: start;
+        }
+
+        .flavor-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
     </style>
 </head>
 
 <body class="bg-white">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="leaf-particle" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="leaf-particle" style="top: 20%; left: 90%; animation-delay: 2s;"></div>
+        <div class="leaf-particle" style="top: 60%; left: 15%; animation-delay: 4s;"></div>
+        <div class="leaf-particle" style="top: 80%; left: 80%; animation-delay: 6s;"></div>
+    </div>
+
     <!-- Header & Navigation -->
-    <header id="navbar" class="fixed w-full z-[999] bg-transparent transition-all duration-300">
-        <nav class="container mx-auto px-4 py-5 flex justify-between items-center">
+    <header class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center">
                 <div
-                    class="w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center mr-3">
+                    class="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mr-3 floating-element">
                     <i class="bi bi-geo-alt text-white text-xl"></i>
                 </div>
-                <span class="text-xl font-bold nav-title text-white">WonderfulID</span>
+                <span class="text-xl font-bold gradient-text">WonderfulID</span>
             </div>
 
-            <!-- Desktop Menu -->
             <div class="hidden lg:flex space-x-8">
-                <a href="#home" class="nav-link text-white">Beranda</a>
-                <a href="#destinasi" class="nav-link text-white">Destinasi</a>
-                <a href="kuliner.html" class="nav-link text-white">Kuliner</a>
-                <a href="#aktivitas" class="nav-link text-white">Aktivitas</a>
-                <a href="#testimoni" class="nav-link text-white">Testimoni</a>
-                <a href="#kontak" class="nav-link text-white">Kontak</a>
+                <a href="index.html"
+                    class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors">Beranda</a>
+                <a href="destinasi.html"
+                    class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors">Destinasi</a>
+                <a href="kuliner.html" class="nav-link text-emerald-600 font-medium transition-colors">Kuliner</a>
+                <a href="aktivitas.html"
+                    class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors">Aktivitas</a>
+                <a href="testimoni.html"
+                    class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors">Testimoni</a>
+                <a href="kontak.html"
+                    class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition-colors">Kontak</a>
             </div>
 
-            <!-- Buttons -->
             <div class="flex items-center space-x-4">
-                <button id="search-toggle" class="nav-icon text-white transition-colors">
+                <button id="search-toggle" class="text-gray-700 hover:text-emerald-600 transition-colors">
                     <i class="bi bi-search text-xl"></i>
                 </button>
-
-                <button
-                    class="btn-primary text-white px-5 py-2.5 rounded-full font-medium bg-green-600 hover:bg-green-700 transition">
-                    Jelajahi
+                <button class="btn-primary text-white px-5 py-2.5 rounded-full font-medium">
+                    <i class="bi bi-compass mr-2"></i>Jelajahi
                 </button>
-
-                <button id="menu-toggle" class="nav-icon lg:hidden text-white text-3xl">
+                <button id="menu-toggle" class="lg:hidden text-gray-700 text-2xl">
                     <i class="bi bi-list"></i>
                 </button>
             </div>
         </nav>
 
         <!-- Search Bar -->
-        <div id="search-bar" class="hidden absolute top-0 left-0 w-full bg-white shadow-lg py-4 px-4 z-[900]">
+        <div id="search-bar" class="search-bar absolute top-0 left-0 w-full bg-white shadow-lg py-4 px-4">
             <div class="container mx-auto flex items-center">
-                <input type="text" class="w-full py-3 px-4 border border-gray-300 rounded-l-lg"
-                    placeholder="Cari destinasi, kuliner, atau aktivitas...">
-                <button class="bg-green-600 text-white px-6 py-3 rounded-r-lg"><i class="bi bi-search"></i></button>
-                <button id="close-search" class="ml-4 text-gray-500"><i class="bi bi-x-lg"></i></button>
+                <input type="text" placeholder="Cari makanan, resep, atau bahan..."
+                    class="w-full py-3 px-4 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <button class="bg-emerald-500 hover:bg-emerald-600 text-white py-3 px-6 rounded-r-lg transition-colors">
+                    <i class="bi bi-search"></i>
+                </button>
+                <button id="close-search" class="ml-4 text-gray-500 hover:text-gray-700">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Overlay Mobile -->
-    <div id="overlay" class="fixed inset-0 bg-black/50 z-[900] hidden transition-opacity duration-300"></div>
-
     <!-- Mobile Menu -->
-    <div id="mobile-menu"
-        class="fixed top-0 right-[-100%] w-80 h-full bg-white shadow-2xl z-[999] p-6 transition-all duration-300">
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full bg-white shadow-2xl z-50 p-6">
         <div class="flex justify-between items-center mb-10">
             <div class="flex items-center">
                 <div
-                    class="w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center mr-3">
+                    class="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mr-3">
                     <i class="bi bi-geo-alt text-white text-xl"></i>
                 </div>
-                <span class="text-xl font-bold text-green-700">WonderfulID</span>
+                <span class="text-xl font-bold gradient-text">WonderfulID</span>
             </div>
-            <button id="close-menu" class="text-gray-700 text-2xl"><i class="bi bi-x-lg"></i></button>
+            <button id="close-menu" class="text-gray-700 text-2xl">
+                <i class="bi bi-x-lg"></i>
+            </button>
         </div>
 
         <div class="flex flex-col space-y-6">
-            <a href="#home" class="mobile-link text-green-700 font-semibold">Beranda</a>
-            <a href="#destinasi" class="mobile-link text-green-700 font-semibold">Destinasi</a>
-            <a href="#kuliner" class="mobile-link text-green-700 font-semibold">Kuliner</a>
-            <a href="#aktivitas" class="mobile-link text-green-700 font-semibold">Aktivitas</a>
-            <a href="#testimoni" class="mobile-link text-green-700 font-semibold">Testimoni</a>
-            <a href="#kontak" class="mobile-link text-green-700 font-semibold">Kontak</a>
+            <a href="index.html"
+                class="text-lg font-medium text-gray-700 hover:text-emerald-600 transition-colors py-2 border-b border-gray-100">Beranda</a>
+            <a href="destinasi.html"
+                class="text-lg font-medium text-gray-700 hover:text-emerald-600 transition-colors py-2 border-b border-gray-100">Destinasi</a>
+            <a href="kuliner.html"
+                class="text-lg font-medium text-emerald-600 transition-colors py-2 border-b border-gray-100">Kuliner</a>
+            <a href="aktivitas.html"
+                class="text-lg font-medium text-gray-700 hover:text-emerald-600 transition-colors py-2 border-b border-gray-100">Aktivitas</a>
+            <a href="testimoni.html"
+                class="text-lg font-medium text-gray-700 hover:text-emerald-600 transition-colors py-2 border-b border-gray-100">Testimoni</a>
+            <a href="kontak.html"
+                class="text-lg font-medium text-gray-700 hover:text-emerald-600 transition-colors py-2 border-b border-gray-100">Kontak</a>
         </div>
 
         <div class="absolute bottom-6 left-6 right-6">
-            <button class="bg-green-600 text-white w-full py-3 rounded-lg hover:bg-green-700 transition">Jelajahi
-                Sekarang</button>
+            <button class="w-full btn-primary text-white py-3 rounded-lg font-medium">
+                <i class="bi bi-compass mr-2"></i>Jelajahi Sekarang
+            </button>
         </div>
     </div>
 
-    <!-- Hero Section Kuliner -->
-    <section class="culinary-hero relative flex items-center justify-center text-white overflow-hidden">
+    <!-- Hero Section dengan Background Image -->
+    <section class="hero-section relative flex items-center justify-center text-white overflow-hidden">
         <div class="absolute inset-0">
-            <img src="https://media.istockphoto.com/id/165249935/id/foto/rendang-daging-sapi.jpg?s=612x612&w=0&k=20&c=UiOL1fbExZ2yKK1cu8zIuA9ldccdXSeGoBVjpYm2Sq0="
-                alt="Rendang" class="w-full h-full object-cover">
+            <img src="https://i.pinimg.com/1200x/0b/bb/e8/0bbbe8435a1373f6564377a6059cb710.jpg" alt="Kuliner Indonesia"
+                class="w-full h-full object-cover">
+
+            <!-- Overlay diganti dari hijau menjadi hitam transparan -->
             <div class="absolute inset-0 bg-black/50"></div>
         </div>
 
         <div class="container mx-auto px-4 text-center relative z-10" data-aos="fade-up">
-            <div class="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-                <i class="bi bi-award-fill text-amber-300 mr-2"></i>
-                <span class="text-sm font-semibold">Masakan Terbaik Dunia</span>
-            </div>
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-300">Rendang</span>
+                <span class="typewriter">Kuliner Nusantara</span>
             </h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Hidangan daging yang dimasak perlahan dengan bumbu rempah khas Minangkabau
+                Jelajahi keanekaragaman rasa dan kekayaan kuliner tradisional dari berbagai daerah di Indonesia
             </p>
-            <div class="flex flex-wrap justify-center gap-4 text-lg">
-                <div class="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <i class="bi bi-clock mr-2"></i> 4-6 Jam
+
+            <!-- Stats Counter -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
+                    <div class="text-2xl font-bold text-white mb-1" id="recipe-count">0</div>
+                    <div class="text-white/80 text-sm">Resep Tradisional</div>
                 </div>
-                <div class="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <i class="bi bi-people mr-2"></i> 8-10 Porsi
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
+                    <div class="text-2xl font-bold text-white mb-1" id="province-count">0</div>
+                    <div class="text-white/80 text-sm">Provinsi</div>
                 </div>
-                <div class="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <i class="bi bi-star-fill text-amber-300 mr-2"></i> 4.9/5
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
+                    <div class="text-2xl font-bold text-white mb-1" id="region-count">0</div>
+                    <div class="text-white/80 text-sm">Daerah</div>
                 </div>
-                <div class="flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <i class="bi bi-heart-fill mr-2"></i> Tambah Favorit
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
+                    <div class="text-2xl font-bold text-white mb-1" id="ingredient-count">0</div>
+                    <div class="text-white/80 text-sm">Bahan Rempah</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Navigation Tabs -->
-    <section class="sticky top-20 z-40 bg-white shadow-sm">
-        <div class="container mx-auto px-4">
-            <div class="flex overflow-x-auto">
-                <button class="tab-button active flex-shrink-0 px-6 py-4 text-gray-600 font-medium">
-                    <i class="bi bi-info-circle mr-2"></i>Deskripsi
-                </button>
-                <button class="tab-button flex-shrink-0 px-6 py-4 text-gray-600 font-medium">
-                    <i class="bi bi-list-ul mr-2"></i>Bahan & Resep
-                </button>
-                <button class="tab-button flex-shrink-0 px-6 py-4 text-gray-600 font-medium">
-                    <i class="bi bi-nutrition mr-2"></i>Nutrisi
-                </button>
-            </div>
-        </div>
-    </section>
 
-    <!-- Deskripsi Kuliner -->
+    <!-- Cerita Kuliner Indonesia -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Warisan Kuliner Indonesia</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Setiap hidangan menyimpan cerita dan filosofi yang mendalam tentang budaya Nusantara
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div data-aos="fade-right">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">Sejarah & Filosofi Rendang</h2>
-                    <div class="space-y-4 text-gray-600">
-                        <p class="text-lg">
-                            <strong>Rendang</strong> adalah masakan daging yang berasal dari Minangkabau, Sumatera
-                            Barat.
-                            Masakan ini dihasilkan dari proses memasak yang memakan waktu berjam-jam dengan menggunakan
-                            aneka rempah-rempah dan santan.
+                    <div class="culinary-story p-6 rounded-2xl mb-6">
+                        <h3 class="text-xl font-bold mb-3 text-emerald-700">Filosofi dalam Setiap Suapan</h3>
+                        <p class="text-gray-600">
+                            Kuliner Indonesia bukan sekadar makanan, melainkan perpaduan harmonis antara alam, budaya,
+                            dan nilai-nilai kehidupan. Setiap rempah memiliki makna, setiap teknik memasak mengandung
+                            kearifan lokal yang turun-temurun.
                         </p>
-                        <p>
-                            Pada 2011, rendang dinobatkan sebagai hidangan peringkat pertama dalam daftar World's
-                            50 Most Delicious Foods (50 Hidangan Terlezat Dunia) versi CNN International.
-                        </p>
-                        <p>
-                            Filosofi rendang dalam budaya Minangkabau melambangkan keselarasan dan keseimbangan hidup.
-                            Empat bahan pokoknya melambangkan keutuhan masyarakat Minang:
-                        </p>
-                        <ul class="list-disc list-inside space-y-2 ml-4">
-                            <li><strong>Daging ( Dagiang )</strong> : Lambang "Niniak Mamak" (pemimpin adat)</li>
-                            <li><strong>Kelapa ( Karambia )</strong> : Lambang "Cadiak Pandai" (kaum intelektual)</li>
-                            <li><strong>Cabai ( Lado )</strong> : Lambang "Alim Ulama" yang tegas mengajarkan syariat
-                            </li>
-                            <li><strong>Bumbu ( Pemasak )</strong> : Lambang keseluruhan masyarakat Minangkabau</li>
-                        </ul>
                     </div>
 
-                    <div class="mt-8 p-6 bg-amber-50 rounded-2xl border border-amber-200">
-                        <div class="flex items-start">
-                            <i class="bi bi-lightbulb text-amber-500 text-2xl mr-4 mt-1"></i>
-                            <div>
-                                <h4 class="font-bold text-amber-800 mb-2">Fakta Menarik</h4>
-                                <p class="text-amber-700">
-                                    Proses memasak rendang yang lama bertujuan untuk mengawetkan daging.
-                                    Rendang yang dimasak dengan benar dapat bertahan hingga berminggu-minggu
-                                    tanpa perlu disimpan di kulkas.
-                                </p>
-                            </div>
-                        </div>
+                    <div class="culinary-story p-6 rounded-2xl">
+                        <h3 class="text-xl font-bold mb-3 text-emerald-700">Dari Sabang sampai Merauke</h3>
+                        <p class="text-gray-600">
+                            Dengan lebih dari 17.000 pulau, Indonesia memiliki kekayaan kuliner yang tak ternilai.
+                            Dari Rendang Padang yang mendunia hingga Papeda Papua yang autentik, setiap daerah
+                            menyumbangkan keunikan rasa yang membentuk identitas kuliner nasional.
+                        </p>
                     </div>
                 </div>
 
-                <div data-aos="fade-left" class="relative">
-                    <img src="https://media.istockphoto.com/id/165179871/id/foto/daging-sapi-rendang.jpg?s=612x612&w=0&k=20&c=iDUP84wDJ6K-uSmPootsy_G-UFlf-ChOjI3NBhVG-AE="
-                        alt="Proses Membuat Rendang" class="rounded-2xl shadow-2xl">
-                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-lg">
-                        <div class="flex items-center">
-                            <div
-                                class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-orange-500 rounded-full flex items-center justify-center text-white mr-4">
-                                <i class="bi bi-geo-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Asal Usul</h4>
-                                <p class="text-sm text-gray-600">Minangkabau, Sumatera Barat</p>
-                            </div>
-                        </div>
-                    </div>
+                <div data-aos="fade-left">
+                    <img src="https://i.pinimg.com/1200x/b7/30/c0/b730c0ef7de427c94415813aa65ed0ef.jpg"
+                        alt="Kuliner Indonesia" class="rounded-2xl shadow-2xl">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Bahan dan Resep -->
+    <!-- Filter Section Berdasarkan Daerah -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Bahan & Cara Membuat</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Jelajahi Berdasarkan Daerah</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">
-                    Ikuti langkah-langkah berikut untuk membuat rendang autentik khas Minangkabau
+                    Temukan keunikan kuliner dari berbagai penjuru Nusantara
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Bahan-bahan -->
-                <div data-aos="fade-right">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-32">
-                        <h3 class="text-2xl font-bold mb-6 flex items-center">
-                            <i class="bi bi-basket2 mr-3 text-cyan-600"></i>
-                            Bahan-bahan
-                        </h3>
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up">
+                <button
+                    class="filter-btn active bg-emerald-500 text-white px-6 py-3 rounded-full font-medium transition-all transform hover:scale-105">
+                    Semua Daerah
+                </button>
+                <button
+                    class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-50 transition-all transform hover:scale-105">
+                    <i class="bi bi-geo-alt mr-2"></i>Sumatera
+                </button>
+                <button
+                    class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-50 transition-all transform hover:scale-105">
+                    <i class="bi bi-geo-alt mr-2"></i>Jawa
+                </button>
+                <button
+                    class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-50 transition-all transform hover:scale-105">
+                    <i class="bi bi-geo-alt mr-2"></i>Bali & Nusa Tenggara
+                </button>
+                <button
+                    class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-50 transition-all transform hover:scale-105">
+                    <i class="bi bi-geo-alt mr-2"></i>Kalimantan
+                </button>
+                <button
+                    class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-50 transition-all transform hover:scale-105">
+                    <i class="bi bi-geo-alt mr-2"></i>Sulawesi
+                </button>
+                <button
+                    class="filter-btn bg-white text-gray-700 border border-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-50 transition-all transform hover:scale-105">
+                    <i class="bi bi-geo-alt mr-2"></i>Maluku & Papua
+                </button>
+            </div>
+        </div>
+    </section>
 
-                        <div class="mb-6">
-                            <h4 class="font-bold text-lg mb-3 text-cyan-700">Bahan Utama:</h4>
-                            <div class="space-y-3">
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Daging sapi (has dalam)</span>
-                                        <span class="font-bold text-cyan-600">1 kg</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Santan kental</span>
-                                        <span class="font-bold text-cyan-600">2 liter</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Kelapa parut sangrai</span>
-                                        <span class="font-bold text-cyan-600">100 gram</span>
-                                    </div>
-                                </div>
+    <!-- Kuliner Grid -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Kuliner 1 - Rendang -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://i.pinimg.com/1200x/b1/e7/8d/b1e78de7d977e44704e5961459a92b30.jpg"
+                            alt="Papeda" class="w-full h-full object-cover image-zoom">
+                        <div class="culinary-tag"><i class="bi bi-award-fill mr-1"></i> Ikonik Papua</div>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Papeda</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.8
                             </div>
                         </div>
 
-                        <div class="mb-6">
-                            <h4 class="font-bold text-lg mb-3 text-cyan-700">Bumbu Halus:</h4>
-                            <div class="space-y-3">
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Bawang merah</span>
-                                        <span class="font-bold text-cyan-600">15 siung</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Bawang putih</span>
-                                        <span class="font-bold text-cyan-600">8 siung</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Cabai merah besar</span>
-                                        <span class="font-bold text-cyan-600">10 buah</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Kemiri</span>
-                                        <span class="font-bold text-cyan-600">5 butir</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Ketumbar</span>
-                                        <span class="font-bold text-cyan-600">1 sdt</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <p class="text-gray-600 mb-4">
+                            Hidangan khas Papua berupa bubur sagu bertekstur kenyal, biasanya disajikan dengan kuah
+                            kuning ikan.
+                        </p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="flavor-badge"><i class="bi bi-geo-alt mr-1"></i> Papua</span>
+                            <span class="text-emerald-600 font-semibold"><i class="bi bi-people mr-1"></i>
+                                Favorit Lokal</span>
                         </div>
 
-                        <div>
-                            <h4 class="font-bold text-lg mb-3 text-cyan-700">Bumbu Pelengkap:</h4>
-                            <div class="space-y-3">
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Serai (memarkan)</span>
-                                        <span class="font-bold text-cyan-600">3 batang</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Lengkuas (memarkan)</span>
-                                        <span class="font-bold text-cyan-600">3 cm</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Daun jeruk</span>
-                                        <span class="font-bold text-cyan-600">5 lembar</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Daun salam</span>
-                                        <span class="font-bold text-cyan-600">3 lembar</span>
-                                    </div>
-                                </div>
-                                <div class="ingredient-card bg-white p-3 rounded-lg border border-gray-200">
-                                    <div class="flex justify-between items-center">
-                                        <span>Gula merah</span>
-                                        <span class="font-bold text-cyan-600">1 sdm</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="flex space-x-2 mb-4">
+                            <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs">Kenyal</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Sagu</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Tradisional</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cara Membuat -->
-                <div data-aos="fade-left">
-                    <div class="space-y-6">
-                        <div class="step-card bg-white rounded-2xl shadow-lg p-6">
-                            <div class="flex items-start mb-4">
-                                <div
-                                    class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                                    1
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-2">Persiapan Bahan</h3>
-                                    <p class="text-gray-600">
-                                        Potong daging sapi sesuai serat, jangan terlalu tipis. Haluskan semua bumbu
-                                        halus
-                                        menggunakan blender atau ulekan. Sangrai kelapa parut hingga kecoklatan, lalu
-                                        haluskan.
-                                    </p>
-                                </div>
+
+                <!-- Kuliner - Gudeg -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://i.pinimg.com/1200x/db/e6/ad/dbe6ad6e69f55c3eaa09df449d73a6db.jpg"
+                            alt="Gudeg" class="w-full h-full object-cover image-zoom">
+                        <div class="culinary-tag"><i class="bi bi-star-fill mr-1"></i> Ikonik Jogja</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Gudeg Yogyakarta</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.8
                             </div>
                         </div>
 
-                        <div class="step-card bg-white rounded-2xl shadow-lg p-6">
-                            <div class="flex items-start mb-4">
-                                <div
-                                    class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                                    2
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-2">Tumis Bumbu</h3>
-                                    <p class="text-gray-600">
-                                        Panaskan sedikit minyak, tumis bumbu halus bersama serai, lengkuas, daun jeruk,
-                                        dan daun salam hingga harum dan matang. Aduk terus agar tidak gosong.
-                                    </p>
-                                </div>
-                            </div>
+                        <p class="text-gray-600 mb-4">
+                            Masakan manis khas Yogyakarta berbahan nangka muda yang dimasak lama bersama santan dan
+                            rempah.
+                        </p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="flavor-badge"><i class="bi bi-geo-alt mr-1"></i> Yogyakarta</span>
+                            <span class="text-emerald-600 font-semibold">
+                                <i class="bi bi-fire mr-1"></i> Favorit Wisata
+                            </span>
                         </div>
 
-                        <div class="step-card bg-white rounded-2xl shadow-lg p-6">
-                            <div class="flex items-start mb-4">
-                                <div
-                                    class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                                    3
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-2">Masak dengan Santan</h3>
-                                    <p class="text-gray-600">
-                                        Masukkan daging sapi, aduk hingga tercampur rata dengan bumbu. Tuang santan
-                                        sedikit demi sedikit sambil terus diaduk. Masak dengan api sedang.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="step-card bg-white rounded-2xl shadow-lg p-6">
-                            <div class="flex items-start mb-4">
-                                <div
-                                    class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                                    4
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-2">Proses Pemasakan Panjang</h3>
-                                    <p class="text-gray-600">
-                                        Setelah mendidih, kecilkan api. Masak rendang selama 3-4 jam sambil sesekali
-                                        diaduk hingga santan menyusut dan bumbu meresap. Tambahkan kelapa sangrai yang
-                                        telah dihaluskan.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="step-card bg-white rounded-2xl shadow-lg p-6">
-                            <div class="flex items-start mb-4">
-                                <div
-                                    class="w-10 h-10 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">
-                                    5
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-2">Koreksi Rasa dan Penyajian</h3>
-                                    <p class="text-gray-600">
-                                        Tambahkan garam dan gula merah sesuai selera. Masak terus hingga rendang
-                                        benar-benar kering dan berwarna coklat kehitaman. Angkat dan sajikan hangat.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
-                            <div class="flex items-start">
-                                <i class="bi bi-lightbulb text-amber-500 text-2xl mr-4 mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold text-amber-800 mb-2">Tips Membuat Rendang Sempurna</h4>
-                                    <ul class="text-amber-700 space-y-2">
-                                        <li>• Gunakan daging has dalam untuk hasil yang lebih empuk</li>
-                                        <li>• Aduk sesekali saja untuk menghindari daging hancur</li>
-                                        <li>• Masak dengan api kecil untuk hasil yang maksimal</li>
-                                        <li>• Rendang semakin enak jika disimpan semalaman</li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="flex space-x-2 mb-4">
+                            <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs">Manis</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Santan</span>
+                            <span
+                                class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Tradisional</span>
                         </div>
                     </div>
+                </div>
+
+                <!-- Kuliner 3 - Gado-gado -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://i.pinimg.com/736x/f1/b8/98/f1b89847e14984c74d4afd41fbe4fd8e.jpg"
+                            alt="Gado-gado" class="w-full h-full object-cover image-zoom">
+                        <div class="culinary-tag" style="background:#10b981;"><i class="bi bi-heart-fill mr-1"></i>
+                            Sehat</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Gado-gado</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.5
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Salad khas Indonesia dengan sayuran rebus, tahu, tempe, dan saus
+                            kacang.</p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="flavor-badge"><i class="bi bi-geo-alt mr-1"></i> Jakarta</span>
+                            <span class="text-emerald-600 font-semibold"><i class="bi bi-leaf mr-1"></i>
+                                Vegetarian</span>
+                        </div>
+
+                        <div class="flex space-x-2 mb-4">
+                            <span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full text-xs">Segar</span>
+                            <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs">Kacang</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Sayuran</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kuliner 4 - Soto Ayam -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="400">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://i.pinimg.com/1200x/5e/80/92/5e809279b9765d8baa69323f86d1205a.jpg"
+                            alt="Soto Ayam" class="w-full h-full object-cover image-zoom">
+                        <div class="culinary-tag"><i class="bi bi-brightness-high-fill mr-1"></i> Hangat</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Soto Ayam</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.7
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Sup ayam berkuah kuning dengan aroma rempah yang khas.</p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="flavor-badge"><i class="bi bi-geo-alt mr-1"></i> Jawa</span>
+                            <span class="text-emerald-600 font-semibold"><i class="bi bi-thermometer-sun mr-1"></i>
+                                Hangat</span>
+                        </div>
+
+                        <div class="flex space-x-2 mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Kuah</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Rempah</span>
+                            <span class="bg-lime-100 text-lime-800 px-2 py-1 rounded-full text-xs">Ringan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kuliner 5 - Pempek -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="500">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://i.pinimg.com/736x/cb/ab/36/cbab3668111326924649e6214dae92e1.jpg"
+                            alt="Pempek Palembang" class="w-full h-full object-cover image-zoom">
+                        <div class="culinary-tag"><i class="bi bi-droplet-half mr-1"></i> Kuah Cuko</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Pempek Palembang</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.6
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Olahan ikan tenggiri khas Palembang yang disajikan dengan kuah
+                            cuko asam-manis pedas.</p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="flavor-badge"><i class="bi bi-geo-alt mr-1"></i> Sumatera Selatan</span>
+                            <span class="text-emerald-600 font-semibold"><i class="bi bi-lightning mr-1"></i>
+                                Favorit</span>
+                        </div>
+
+                        <div class="flex space-x-2 mb-4">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Pedas</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs">Ikan</span>
+                            <span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs">Asam</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kuliner 6 - Rawon -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="600">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://i.pinimg.com/1200x/b4/3b/bb/b43bbb46f63ec38e303b5ee55ab69ae5.jpg"
+                            alt="Rawon" class="w-full h-full object-cover image-zoom">
+                        <div class="culinary-tag bg-gray-800"><i class="bi bi-bowl-hot mr-1"></i> Legendaris</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Rawon</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.9
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Sup daging berkuah hitam khas Jawa Timur dengan bumbu kluwek yang
+                            harum.</p>
+
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="flavor-badge"><i class="bi bi-geo-alt mr-1"></i> Jawa Timur</span>
+                            <span class="text-emerald-600 font-semibold"><i class="bi bi-fire mr-1"></i> Kaya
+                                Rempah</span>
+                        </div>
+
+                        <div class="flex space-x-2 mb-4">
+                            <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded-full text-xs">Kuwek</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs">Daging</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Kuah Hitam</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12" data-aos="fade-up">
+                <nav class="flex items-center space-x-2">
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                        class="pagination-btn active w-10 h-10 flex items-center justify-center rounded-lg border border-emerald-500 bg-emerald-500 text-white">1</button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">2</button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">3</button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">...</button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">8</button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </nav>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Fakta Menarik Kuliner -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Fakta Menarik Kuliner Indonesia</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Temukan hal-hal unik dan menarik seputar kuliner Nusantara
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="culinary-fact p-6 text-center" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="fact-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-award text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">No. 1 Dunia</h3>
+                    <p class="text-white/90">Rendang dinobatkan sebagai makanan terenak di dunia oleh CNN International
+                    </p>
+                </div>
+
+                <div class="culinary-fact p-6 text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="fact-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-egg-fried text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Rempah Beragam</h3>
+                    <p class="text-white/90">Indonesia memiliki lebih dari 300 jenis rempah-rempah asli</p>
+                </div>
+
+                <div class="culinary-fact p-6 text-center" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="fact-icon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-globe text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Warisan Dunia</h3>
+                    <p class="text-white/90">Beberapa kuliner Indonesia diakui sebagai warisan budaya tak benda UNESCO
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Informasi Nutrisi -->
+    <!-- Testimoni -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Informasi Nutrisi</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Kata Mereka</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">
-                    Kandungan gizi dalam satu porsi rendang (100 gram)
+                    Pengalaman para pecinta kuliner yang telah menjelajahi kelezatan Nusantara
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="nutrition-card rounded-2xl p-6 text-center border border-gray-200" data-aos="zoom-in"
-                    data-aos-delay="100">
-                    <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="bi bi-fire text-cyan-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-cyan-600 mb-2">193</h3>
-                    <p class="text-gray-600 font-medium">Kalori</p>
-                </div>
-
-                <div class="nutrition-card rounded-2xl p-6 text-center border border-gray-200" data-aos="zoom-in"
-                    data-aos-delay="200">
-                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="bi bi-droplet text-orange-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-orange-600 mb-2">15g</h3>
-                    <p class="text-gray-600 font-medium">Protein</p>
-                </div>
-
-                <div class="nutrition-card rounded-2xl p-6 text-center border border-gray-200" data-aos="zoom-in"
-                    data-aos-delay="300">
-                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="bi bi-circle text-amber-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-amber-600 mb-2">12g</h3>
-                    <p class="text-gray-600 font-medium">Lemak</p>
-                </div>
-
-                <div class="nutrition-card rounded-2xl p-6 text-center border border-gray-200" data-aos="zoom-in"
-                    data-aos-delay="400">
-                    <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="bi bi-basket text-emerald-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-emerald-600 mb-2">8g</h3>
-                    <p class="text-gray-600 font-medium">Karbohidrat</p>
-                </div>
-            </div>
-
-            <div class="mt-12 bg-gray-50 rounded-2xl p-8" data-aos="fade-up">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6">Manfaat Kesehatan</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <i class="bi bi-check-circle-fill text-emerald-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold mb-1">Sumber Protein Tinggi</h4>
-                                    <p class="text-gray-600 text-sm">Daging sapi kaya akan protein yang essential untuk
-                                        pertumbuhan dan perbaikan sel tubuh</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="bi bi-check-circle-fill text-emerald-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold mb-1">Kaya Rempah Antioksidan</h4>
-                                    <p class="text-gray-600 text-sm">Bumbu rempah seperti kunyit, jahe, dan lengkuas
-                                        mengandung antioksidan yang melawan radikal bebas</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="bi bi-check-circle-fill text-emerald-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold mb-1">Meningkatkan Metabolisme</h4>
-                                    <p class="text-gray-600 text-sm">Cabai dalam rendang mengandung capsaicin yang dapat
-                                        meningkatkan metabolisme tubuh</p>
-                                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pinimg.com/736x/ca/f3/b5/caf3b5cdcf4bbef074556ed9e338bb38.jpg" alt="Sarah"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Sarah Wijaya</h4>
+                            <div class="flex text-amber-400 text-sm">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
                             </div>
                         </div>
                     </div>
+                    <p class="text-gray-600 italic">
+                        "Pengalaman mencoba kuliner Indonesia melalui WonderfulID membuka mata saya tentang kekayaan
+                        rasa Nusantara. Setiap daerah punya cerita unik!"
+                    </p>
+                </div>
 
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6">Saran Penyajian</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <i class="bi bi-arrow-right-circle-fill text-cyan-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold mb-1">Dengan Nasi Putih Hangat</h4>
-                                    <p class="text-gray-600 text-sm">Sajikan rendang dengan nasi putih hangat untuk
-                                        pengalaman kuliner terbaik</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="bi bi-arrow-right-circle-fill text-cyan-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold mb-1">Sayuran Pendamping</h4>
-                                    <p class="text-gray-600 text-sm">Tambahkan sayuran rebus seperti kacang panjang atau
-                                        daun singkong</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <i class="bi bi-arrow-right-circle-fill text-cyan-500 text-xl mr-3 mt-1"></i>
-                                <div>
-                                    <h4 class="font-bold mb-1">Sambal dan Kerupuk</h4>
-                                    <p class="text-gray-600 text-sm">Lengkapi dengan sambal hijau dan kerupuk kulit
-                                        untuk tekstur yang beragam</p>
-                                </div>
+                <div class="testimonial-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
+                            alt="Budi" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Budi Santoso</h4>
+                            <div class="flex text-amber-400 text-sm">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
                             </div>
                         </div>
                     </div>
+                    <p class="text-gray-600 italic">
+                        "Sebagai chef, saya sangat mengapresiasi dokumentasi kuliner Indonesia yang lengkap di sini.
+                        Sangat membantu untuk melestarikan resep tradisional."
+                    </p>
+                </div>
+
+                <div class="testimonial-card p-6 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
+                            alt="Maria" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Maria Garcia</h4>
+                            <div class="flex text-amber-400 text-sm">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "Traveler dari Spanyol, saya jatuh cinta dengan keragaman kuliner Indonesia. Setiap pulau punya
+                        keunikan rasa yang berbeda-beda!"
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-[url('https://plus.unsplash.com/premium_photo-1664360228209-bb15b0c5be8f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aW5kb25lc2lhbiUyMGZvb2R8ZW58MHx8MHx8fDA%3D')] 
+    <section class="py-20 bg-[url('https://i.pinimg.com/1200x/9e/c3/28/9ec328ac9dc7f70b95f208b81dd3e5e9.jpg')] 
     bg-cover bg-center relative text-white">
 
-        <!-- Overlay gelap biar teks putih lebih kebaca -->
+        <!-- Overlay -->
         <div class="absolute inset-0 bg-black/40"></div>
 
-        <div class="relative container mx-auto px-6 text-center" data-aos="fade-up">
-            <h2 class="text-4xl font-extrabold mb-4">Eksplor Lebih Banyak Kuliner Nusantara</h2>
-            <p class="text-lg mb-10 max-w-2xl mx-auto">
-                Temukan hidangan autentik lainnya dari Sabang sampai Merauke dalam koleksi resep kami.
+        <div class="relative container mx-auto px-4 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6">
+                Jelajahi Kelezatan Nusantara
+            </h2>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-200">
+                Temukan hidangan autentik dari seluruh Indonesia dan mulai perjalanan kuliner yang tak terlupakan.
             </p>
-
-            <div class="flex flex-col md:flex-row justify-center gap-5">
+            <div class="flex flex-col md:flex-row justify-center gap-4">
                 <button
-                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-xl transition">
-                    <i class="bi bi-search-heart mr-2"></i> Temukan Kuliner Lainnya
+                    class="bg-transparent hover:bg-white/10 border border-white text-white px-8 py-3 rounded-full text-lg font-semibold transition">
+                    <i class="bi bi-journal-text mr-2"></i> Jelajahi Kuliner
                 </button>
             </div>
         </div>
@@ -802,92 +1006,86 @@
 
 
     <!-- Footer -->
-    <footer id="kontak" class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-                <!-- Logo -->
                 <div>
                     <div class="flex items-center mb-6">
                         <div
-                            class="w-10 h-10 rounded-full bg-gradient-to-r from-green-600 to-green-500 flex items-center justify-center mr-3">
+                            class="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 flex items-center justify-center mr-3">
                             <i class="bi bi-geo-alt text-white text-xl"></i>
                         </div>
                         <span class="text-xl font-bold">WonderfulID</span>
                     </div>
-
                     <p class="text-gray-400 mb-6">
                         Portal informasi pariwisata Indonesia terpercaya yang membantu Anda menemukan keindahan dan
                         kuliner nusantara.
                     </p>
-
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
-                                class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
-                                class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
-                                class="bi bi-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
-                                class="bi bi-youtube"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl">
+                            <i class="bi bi-youtube"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
                 <div>
                     <h3 class="text-lg font-bold mb-6">Tautan Cepat</h3>
                     <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-green-400 transition-colors">Beranda</a>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Beranda</a>
                         </li>
-                        <li><a href="#destinasi" class="text-gray-400 hover:text-green-400 transition-colors">Destinasi
+                        <li><a href="destinasi.html" class="text-gray-400 hover:text-white transition-colors">Destinasi
                                 Wisata</a></li>
-                        <li><a href="#kuliner" class="text-gray-400 hover:text-green-400 transition-colors">Kuliner
+                        <li><a href="kuliner.html" class="text-gray-400 hover:text-white transition-colors">Kuliner
                                 Nusantara</a></li>
-                        <li><a href="#aktivitas"
-                                class="text-gray-400 hover:text-green-400 transition-colors">Aktivitas</a></li>
-                        <li><a href="#testimoni"
-                                class="text-gray-400 hover:text-green-400 transition-colors">Testimoni</a></li>
+                        <li><a href="aktivitas.html"
+                                class="text-gray-400 hover:text-white transition-colors">Aktivitas</a></li>
+                        <li><a href="testimoni.html"
+                                class="text-gray-400 hover:text-white transition-colors">Testimoni</a></li>
                     </ul>
                 </div>
 
-                <!-- Popular -->
                 <div>
-                    <h3 class="text-lg font-bold mb-6">Destinasi Populer</h3>
+                    <h3 class="text-lg font-bold mb-6">Kuliner Populer</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Bali</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Yogyakarta</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Raja Ampat</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Lombok</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Labuan Bajo</a>
-                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Rendang</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Sate</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Gado-gado</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Soto</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Nasi Goreng</a></li>
                     </ul>
                 </div>
 
-                <!-- Contact -->
                 <div>
                     <h3 class="text-lg font-bold mb-6">Kontak Kami</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start">
-                            <i class="bi bi-geo-alt mr-3 mt-1 text-green-400"></i>
+                            <i class="bi bi-geo-alt mr-3 mt-1 text-emerald-500"></i>
                             <span class="text-gray-400">Jl. Merdeka No. 123, Jakarta Pusat, Indonesia</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="bi bi-telephone mr-3 text-green-400"></i>
+                            <i class="bi bi-telephone mr-3 text-emerald-500"></i>
                             <span class="text-gray-400">+62 21 1234 5678</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="bi bi-envelope mr-3 text-green-400"></i>
+                            <i class="bi bi-envelope mr-3 text-emerald-500"></i>
                             <span class="text-gray-400">info@wonderfulindonesia.com</span>
                         </li>
                     </ul>
                 </div>
-
             </div>
 
             <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
                 <p>&copy; 2023 Wonderful Indonesia. All rights reserved.</p>
             </div>
-
         </div>
     </footer>
 
@@ -902,6 +1100,42 @@
             duration: 1000,
             once: true,
             offset: 100
+        });
+
+        // Animated Counter
+        function animateCounter(elementId, target, duration = 2000) {
+            const element = document.getElementById(elementId);
+            let start = 0;
+            const increment = target / (duration / 16);
+
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Initialize counters when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(() => {
+                animateCounter('recipe-count', 150);
+                animateCounter('province-count', 34);
+                animateCounter('region-count', 27);
+                animateCounter('ingredient-count', 87);
+            }, 500);
+        });
+
+        // Filter buttons functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
         });
 
         // Mobile Menu Toggle
@@ -928,34 +1162,6 @@
 
         closeSearch.addEventListener('click', () => {
             searchBar.classList.remove('active');
-        });
-
-        // Tab Navigation
-        const tabButtons = document.querySelectorAll('.tab-button');
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Scroll to corresponding section
-                const tabText = button.textContent.trim();
-                let targetSection;
-
-                if (tabText.includes('Deskripsi')) {
-                    targetSection = document.querySelector('section:nth-of-type(4)');
-                } else if (tabText.includes('Bahan')) {
-                    targetSection = document.querySelector('section:nth-of-type(5)');
-                } else if (tabText.includes('Nutrisi')) {
-                    targetSection = document.querySelector('section:nth-of-type(6)');
-                }
-
-                if (targetSection) {
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
         });
 
         // Smooth scrolling for anchor links
