@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinasi Wisata - Wonderful Indonesia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #16A34A;
+            /* Hijau emerald – modern, segar */
+            --secondary: #86EFAC;
+            /* Hijau muda lembut */
+            --accent: #FACC15;
+            /* Kuning soft opsional (bisa dihapus) */
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9) 0%, rgba(249, 115, 22, 0.8) 100%);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .card-hover {
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-zoom {
+            transition: transform 0.7s ease;
+        }
+
+        .card-hover:hover .image-zoom {
+            transform: scale(1.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .search-bar {
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .search-bar.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .destination-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .region-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            height: 200px;
+        }
+
+        .region-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            padding: 20px;
+            color: white;
+        }
+
+        .pagination-btn {
+            transition: all 0.3s ease;
+        }
+
+        .pagination-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pagination-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 60vh;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <header id="navbar" class="fixed w-full z-[999] bg-transparent transition-all duration-300">
+        <nav class="container mx-auto px-4 py-5 flex justify-between items-center">
+            <div class="flex items-center">
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center mr-3">
+                    <i class="bi bi-geo-alt text-white text-xl"></i>
+                </div>
+                <span class="text-xl font-bold nav-title text-white">WonderfulID</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex space-x-8">
+                <a href="#home" class="nav-link text-white">Beranda</a>
+                <a href="#destinasi" class="nav-link text-white">Destinasi</a>
+                <a href="#kuliner" class="nav-link text-white">Kuliner</a>
+                <a href="#aktivitas" class="nav-link text-white">Aktivitas</a>
+                <a href="#testimoni" class="nav-link text-white">Testimoni</a>
+                <a href="#kontak" class="nav-link text-white">Kontak</a>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex items-center space-x-4">
+                <button id="search-toggle" class="nav-icon text-white transition-colors">
+                    <i class="bi bi-search text-xl"></i>
+                </button>
+
+                <button
+                    class="btn-primary text-white px-5 py-2.5 rounded-full font-medium bg-green-600 hover:bg-green-700 transition">
+                    Jelajahi
+                </button>
+
+                <button id="menu-toggle" class="nav-icon lg:hidden text-white text-3xl">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Search Bar -->
+        <div id="search-bar" class="hidden absolute top-0 left-0 w-full bg-white shadow-lg py-4 px-4 z-[900]">
+            <div class="container mx-auto flex items-center">
+                <input type="text" class="w-full py-3 px-4 border border-gray-300 rounded-l-lg"
+                    placeholder="Cari destinasi, kuliner, atau aktivitas...">
+                <button class="bg-green-600 text-white px-6 py-3 rounded-r-lg"><i class="bi bi-search"></i></button>
+                <button id="close-search" class="ml-4 text-gray-500"><i class="bi bi-x-lg"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overlay Mobile -->
+    <div id="overlay" class="fixed inset-0 bg-black/50 z-[900] hidden transition-opacity duration-300"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="fixed top-0 right-[-100%] w-80 h-full bg-white shadow-2xl z-[999] p-6 transition-all duration-300">
+        <div class="flex justify-between items-center mb-10">
+            <div class="flex items-center">
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-green-700 flex items-center justify-center mr-3">
+                    <i class="bi bi-geo-alt text-white text-xl"></i>
+                </div>
+                <span class="text-xl font-bold text-green-700">WonderfulID</span>
+            </div>
+            <button id="close-menu" class="text-gray-700 text-2xl"><i class="bi bi-x-lg"></i></button>
+        </div>
+
+        <div class="flex flex-col space-y-6">
+            <a href="#home" class="mobile-link text-green-700 font-semibold">Beranda</a>
+            <a href="#destinasi" class="mobile-link text-green-700 font-semibold">Destinasi</a>
+            <a href="#kuliner" class="mobile-link text-green-700 font-semibold">Kuliner</a>
+            <a href="#aktivitas" class="mobile-link text-green-700 font-semibold">Aktivitas</a>
+            <a href="#testimoni" class="mobile-link text-green-700 font-semibold">Testimoni</a>
+            <a href="#kontak" class="mobile-link text-green-700 font-semibold">Kontak</a>
+        </div>
+
+        <div class="absolute bottom-6 left-6 right-6">
+            <button class="bg-green-600 text-white w-full py-3 rounded-lg hover:bg-green-700 transition">Jelajahi
+                Sekarang</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center text-white pt-32 overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?w=2000"
+                class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/20"></div>
+        </div>
+
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-black mb-6">
+                <span>Jelajahi</span>
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-orange-300">
+                    Indonesia
+                </span>
+            </h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10">
+                Temukan pesona alam menakjubkan dan kuliner lezat dari Sabang sampai Merauke
+            </p>
+
+            <div class="flex flex-col md:flex-row justify-center gap-5">
+                <button class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
+                    <i class="bi bi-compass mr-3 text-xl"></i> Jelajahi Destinasi
+                </button>
+                <button class="btn-secondary text-cyan-600 px-8 py-4 rounded-full text-lg font-semibold">
+                    <i class="bi bi-play-circle mr-3 text-xl"></i> Tonton Video
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Destinasi Grid -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Destinasi 1 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://media.istockphoto.com/id/2219417018/id/foto/pantai-kuta-saat-matahari-terbenam.jpg?s=612x612&w=0&k=20&c=5sZ5S4LnNYUBa-LXW49m-jHhckWmTgwXx9efqIB22WA="
+                            alt="Bali" class="w-full h-full object-cover image-zoom">
+                        <div class="destination-tag">
+                            <i class="bi bi-heart-fill mr-1"></i> Populer
+                        </div>
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="bi bi-geo-alt text-cyan-600 mr-1"></i> Bali
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Pantai Kuta, Bali</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.7
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">
+                            Pantai terkenal dengan ombak yang cocok untuk berselancar dan sunset yang memukau. Destinasi
+                            wisata paling populer di Indonesia.
+                        </p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <i class="bi bi-clock mr-2"></i> 5-7 Hari •
+                            <i class="bi bi-people ml-2 mr-2"></i> Keluarga
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-cyan-600 font-bold text-lg">Rp 2.500.000</span>
+                                <span class="text-gray-500 text-sm block">mulai / orang</span>
+                            </div>
+                            <button
+                                class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Detail
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destinasi 2 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1591871937573-74dbba515c4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                            alt="Raja Ampat" class="w-full h-full object-cover image-zoom">
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="bi bi-geo-alt text-cyan-600 mr-1"></i> Papua Barat
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Raja Ampat</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.9
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">
+                            Surga bawah laut dengan keanekaragaman hayati terbesar di dunia. Tempat terbaik untuk diving
+                            dan snorkeling.
+                        </p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <i class="bi bi-clock mr-2"></i> 7-10 Hari •
+                            <i class="bi bi-people ml-2 mr-2"></i> Petualang
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-cyan-600 font-bold text-lg">Rp 5.000.000</span>
+                                <span class="text-gray-500 text-sm block">mulai / orang</span>
+                            </div>
+                            <button
+                                class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Detail
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destinasi 3 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                            alt="Borobudur" class="w-full h-full object-cover image-zoom">
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="bi bi-geo-alt text-cyan-600 mr-1"></i> Jawa Tengah
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Candi Borobudur</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.8
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">
+                            Candi Buddha terbesar di dunia dengan arsitektur megah. Sunrise dari puncak candi adalah
+                            pengalaman tak terlupakan.
+                        </p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <i class="bi bi-clock mr-2"></i> 1-2 Hari •
+                            <i class="bi bi-people ml-2 mr-2"></i> Budaya
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-cyan-600 font-bold text-lg">Rp 500.000</span>
+                                <span class="text-gray-500 text-sm block">mulai / orang</span>
+                            </div>
+                            <button
+                                class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Detail
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destinasi 4 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="400">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1980&q=80"
+                            alt="Bromo" class="w-full h-full object-cover image-zoom">
+                        <div class="destination-tag">
+                            <i class="bi bi-fire mr-1"></i> Trending
+                        </div>
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="bi bi-geo-alt text-cyan-600 mr-1"></i> Jawa Timur
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Gunung Bromo</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.6
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">
+                            Gunung berapi aktif dengan pemandangan sunrise yang spektakuler. Lautan pasir dan kawah yang
+                            mengesankan.
+                        </p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <i class="bi bi-clock mr-2"></i> 2-3 Hari •
+                            <i class="bi bi-people ml-2 mr-2"></i> Petualang
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-cyan-600 font-bold text-lg">Rp 800.000</span>
+                                <span class="text-gray-500 text-sm block">mulai / orang</span>
+                            </div>
+                            <button
+                                class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Detail
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destinasi 5 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="500">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                            alt="Danau Toba" class="w-full h-full object-cover image-zoom">
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="bi bi-geo-alt text-cyan-600 mr-1"></i> Sumatera Utara
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Danau Toba</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.5
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">
+                            Danau vulkanik terbesar di dunia dengan Pulau Samosir di tengahnya. Budaya Batak yang kaya
+                            dan pemandangan menakjubkan.
+                        </p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <i class="bi bi-clock mr-2"></i> 3-5 Hari •
+                            <i class="bi bi-people ml-2 mr-2"></i> Keluarga
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-cyan-600 font-bold text-lg">Rp 1.200.000</span>
+                                <span class="text-gray-500 text-sm block">mulai / orang</span>
+                            </div>
+                            <button
+                                class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Detail
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destinasi 6 -->
+                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up"
+                    data-aos-delay="600">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1505993597083-3bd19fb75e57?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+                            alt="Ubud" class="w-full h-full object-cover image-zoom">
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="bi bi-geo-alt text-cyan-600 mr-1"></i> Bali
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold">Ubud, Bali</h3>
+                            <div class="flex items-center bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-sm">
+                                <i class="bi bi-star-fill mr-1"></i> 4.7
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 line-clamp-2">
+                            Pusat budaya Bali dengan sawah berundak, hutan monkey, seni tradisional, dan spa yang
+                            menenangkan.
+                        </p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <i class="bi bi-clock mr-2"></i> 3-5 Hari •
+                            <i class="bi bi-people ml-2 mr-2"></i> Wellness
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-cyan-600 font-bold text-lg">Rp 1.800.000</span>
+                                <span class="text-gray-500 text-sm block">mulai / orang</span>
+                            </div>
+                            <button
+                                class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Detail
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12" data-aos="fade-up">
+                <nav class="flex items-center space-x-2">
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                        class="pagination-btn active w-10 h-10 flex items-center justify-center rounded-lg border border-cyan-500 bg-cyan-500 text-white">
+                        1
+                    </button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        2
+                    </button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        3
+                    </button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        ...
+                    </button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        8
+                    </button>
+                    <button
+                        class="pagination-btn w-10 h-10 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-50">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Region Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Destinasi Terfavorit</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Pilihan wisata paling populer yang wajib kamu kunjungi minimal sekali seumur hidup!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- BALI -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-500"
+                    data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+                        class="w-full h-64 object-cover transition duration-700 group-hover:scale-110">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
+                    flex flex-col justify-end p-5 text-white">
+                        <h3 class="text-xl font-semibold">Pantai Kuta</h3>
+                        <p class="text-sm opacity-90">Bali</p>
+                    </div>
+                </div>
+
+                <!-- BOROBUDUR -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-500"
+                    data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80"
+                        class="w-full h-64 object-cover transition duration-700 group-hover:scale-110">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
+                    flex flex-col justify-end p-5 text-white">
+                        <h3 class="text-xl font-semibold">Candi Borobudur</h3>
+                        <p class="text-sm opacity-90">Magelang, Jawa Tengah</p>
+                    </div>
+                </div>
+
+                <!-- RAJA AMPAT -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-500"
+                    data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+                        class="w-full h-64 object-cover transition duration-700 group-hover:scale-110">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
+                    flex flex-col justify-end p-5 text-white">
+                        <h3 class="text-xl font-semibold">Raja Ampat</h3>
+                        <p class="text-sm opacity-90">Papua Barat</p>
+                    </div>
+                </div>
+
+                <!-- BROMO -->
+                <div class="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-500"
+                    data-aos="zoom-in" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1546421845-6471bdcf3b08?auto=format&fit=crop&w=1200&q=80"
+                        class="w-full h-64 object-cover transition duration-700 group-hover:scale-110">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
+                    flex flex-col justify-end p-5 text-white">
+                        <h3 class="text-xl font-semibold">Gunung Bromo</h3>
+                        <p class="text-sm opacity-90">Jawa Timur</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="relative py-20 bg-fixed bg-center bg-cover text-white"
+        style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80');">
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+        <div class="relative container mx-auto px-4 text-center" data-aos="fade-up">
+            <!-- Judul -->
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 drop-shadow-lg">
+                Temukan Destinasi Wisata Impian Anda
+            </h2>
+
+            <!-- Subjudul -->
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-200 drop-shadow-md">
+                Jelajahi ribuan destinasi terbaik di seluruh Indonesia dengan mudah.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto flex shadow-2xl rounded-full overflow-hidden bg-white">
+                <input type="text" placeholder="Cari destinasi impian Anda... (Bromo, Raja Ampat, Bali, dsb)"
+                    class="flex-grow py-4 px-6 text-gray-800 focus:outline-none rounded-l-full">
+
+                <button
+                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 font-semibold transition rounded-r-full flex items-center gap-2">
+                    <i class="bi bi-search text-lg"></i>
+                    Cari Wisata
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Logo -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-r from-green-600 to-green-500 flex items-center justify-center mr-3">
+                            <i class="bi bi-geo-alt text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold">WonderfulID</span>
+                    </div>
+
+                    <p class="text-gray-400 mb-6">
+                        Portal informasi pariwisata Indonesia terpercaya yang membantu Anda menemukan keindahan dan
+                        kuliner nusantara.
+                    </p>
+
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                                class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                                class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                                class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors text-xl"><i
+                                class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Tautan Cepat</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-green-400 transition-colors">Beranda</a>
+                        </li>
+                        <li><a href="#destinasi" class="text-gray-400 hover:text-green-400 transition-colors">Destinasi
+                                Wisata</a></li>
+                        <li><a href="#kuliner" class="text-gray-400 hover:text-green-400 transition-colors">Kuliner
+                                Nusantara</a></li>
+                        <li><a href="#aktivitas"
+                                class="text-gray-400 hover:text-green-400 transition-colors">Aktivitas</a></li>
+                        <li><a href="#testimoni"
+                                class="text-gray-400 hover:text-green-400 transition-colors">Testimoni</a></li>
+                    </ul>
+                </div>
+
+                <!-- Popular -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Destinasi Populer</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Bali</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Yogyakarta</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Raja Ampat</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Lombok</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition-colors">Labuan Bajo</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Kontak Kami</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="bi bi-geo-alt mr-3 mt-1 text-green-400"></i>
+                            <span class="text-gray-400">Jl. Merdeka No. 123, Jakarta Pusat, Indonesia</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="bi bi-telephone mr-3 text-green-400"></i>
+                            <span class="text-gray-400">+62 21 1234 5678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="bi bi-envelope mr-3 text-green-400"></i>
+                            <span class="text-gray-400">info@wonderfulindonesia.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Wonderful Indonesia. All rights reserved.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div id="back-to-top" class="back-to-top">
+        <i class="bi bi-chevron-up text-xl"></i>
+    </div>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Search Bar Toggle
+        const searchToggle = document.getElementById('search-toggle');
+        const closeSearch = document.getElementById('close-search');
+        const searchBar = document.getElementById('search-bar');
+
+        searchToggle.addEventListener('click', () => {
+            searchBar.classList.add('active');
+        });
+
+        closeSearch.addEventListener('click', () => {
+            searchBar.classList.remove('active');
+        });
+
+        // Filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('active');
+
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            const backToTop = document.getElementById('back-to-top');
+
+            if (window.scrollY > 100) {
+                header.classList.add('bg-white', 'shadow-md');
+                backToTop.classList.add('active');
+            } else {
+                header.classList.remove('bg-white', 'shadow-md');
+                backToTop.classList.remove('active');
+            }
+        });
+
+        // Back to top functionality
+        document.getElementById('back-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
